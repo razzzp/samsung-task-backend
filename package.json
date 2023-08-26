@@ -6,7 +6,7 @@
   "scripts": {
     "prestart": "npx tsc",
     "start": "node ./out/index.js",
-    "test": "ts-jest"
+    "test": "jest"
   },
   "author": "razif",
   "license": "ISC",

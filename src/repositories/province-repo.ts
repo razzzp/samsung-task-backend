@@ -14,4 +14,16 @@ export class ProvinceRepo implements IRepo<Province>{
     constructor(sqlPool : mysql.Pool) {
         this._pool = sqlPool  
     }
+    getById(id: number): Promise<Province> {
+        throw new Error("Method not implemented.");
+    }
+    getMany(filter: Partial<Province>): Promise<Province[]> {
+        throw new Error("Method not implemented.");
+    }
+    deleteById(id: number): Promise<Province> {
+        throw new Error("Method not implemented.");
+    }
+    save(entity: Province): Promise<Province> {
+        throw new Error("Method not implemented.");
+    }
 }

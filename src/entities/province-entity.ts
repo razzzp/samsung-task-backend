@@ -9,33 +9,32 @@ export interface IProvince extends IEntity{
 
 export class Province extends Entity implements IProvince{
     public name: string;
-    private _fieldMappings: Record<string, ColumnDesc>;
+    private static _fieldMappings: Record<string, ColumnDesc>={
+        'id': {
+            name:'id',
+            type: 'BIGINT UNSIGNED',
+            modifiers: [
+                'PRIMARY KEY',
+            ]
+        },
+        'name': {
+            name: 'name',
+            type: 'VARCHAR(64)',
+            modifiers: undefined,
+        }
+    };
     /**
      *
      */
-    constructor(id :Id,  name: string) {
+    constructor(val: {id :Id,  name: string} = {id:0, name:''}) {
         super();
-        this.id = id;
-        this.name = name;
-        this._fieldMappings ={
-            'id': {
-                name:'id',
-                type: 'BIGINT UNSIGNED',
-                modifiers: [
-                    'PRIMARY KEY',
-                ]
-            },
-            'name': {
-                name: 'name',
-                type: 'VARCHAR(64)',
-                modifiers: undefined,
-            }
-        }
+        this.id = val.id;
+        this.name = val.name;
     }
     public getTableName(): string {
         return 'province'
     }
     public getColumnDescForField(fieldName: string): Option<ColumnDesc>{
-        return this._fieldMappings[fieldName];
+        return Province._fieldMappings[fieldName];
     }
 }

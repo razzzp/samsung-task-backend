@@ -12,7 +12,13 @@ export class Controller<T extends IEntity> {
     constructor(repo: IRepo<T>, ) {
         this._repo = repo;
     }
-    public getEntities(req : Request, res: Response) :  any {
-        return res.send("hello");
+    public async getEntities(req : Request, res: Response) :  Promise<any> {
+        const result = await this._repo.getMany({});
+        return res.send(result);
+    }
+
+    public async getEntityById(id :number, res: Response) :  Promise<any> {
+        const result = await this._repo.getById(id);
+        return res.send(result);
     }
 }

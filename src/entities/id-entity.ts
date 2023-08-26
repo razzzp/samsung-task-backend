@@ -1,3 +1,4 @@
+import { RowDataPacket } from "mysql2";
 import { Option } from "../utils";
 
 
@@ -7,7 +8,7 @@ export interface ColumnDesc {
     modifiers: Option<[string]>;
 }
 
-export interface IEntity {
+export interface IEntity{
     id: Id;
     getTableName() : string;
     getColumnDescForField(fieldName: string): Option<ColumnDesc>;
