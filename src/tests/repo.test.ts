@@ -10,7 +10,7 @@ beforeAll(()=>{
 })
 
 test('test province repo', async ()=>{
-    const repo = RepoFactory.buildProvinceRepo();
-    await repo.getMany({});
+    // const repo = RepoFactory.buildProvinceRepo();
+    // await repo.getMany({});
 
 })

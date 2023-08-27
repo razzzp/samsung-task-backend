@@ -1,13 +1,20 @@
-import { Entity, IEntity } from "../entities/id-entity";
+import { Model } from "sequelize";
+import { Entity, IEntity } from "../entities/entity";
 import mysql, { FieldPacket, RowDataPacket } from "mysql2/promise";
 
 export interface IRepo<T extends IEntity>{
     getById(id: number) : Promise<T>;
     getMany(filter: Partial<T>) : Promise<Array<T>>;
-    deleteById(id: number): Promise<T>;
+    deleteById(id: number): Promise<void>;
     save(entity: T): Promise<T>;
+    create(entity: T): Promise<T>;
+    update(entity: T): Promise<[number]>;
 }
 
+export class RepoObjectNotFoundError extends Error{
+}
+export class RepoParamError extends Error{
+}
 
 export class Repo<T extends IEntity> implements IRepo<T>{
     private _entityFactory : new (...args: any[]) => T;
@@ -18,6 +25,12 @@ export class Repo<T extends IEntity> implements IRepo<T>{
     constructor(entityFactory : new (...args: any[]) => T, sqlPool: mysql.Pool) {
         this._entityFactory = entityFactory;
         this._pool = sqlPool;
+    }
+    create(entity: T): Promise<T> {
+        throw new Error("Method not implemented.");
+    }
+    update(entity: T): Promise<[number]> {
+        throw new Error("Method not implemented.");
     }
 
     private _buildWhereClause(filter: Record<string, any>) : {whereClause:string, values: any[]}{
@@ -90,7 +103,7 @@ export class Repo<T extends IEntity> implements IRepo<T>{
         // console.log(values);
         return result;
     }
-    deleteById(id: number): Promise<T> {
+    deleteById(id: number): Promise<void> {
         throw new Error("Method not implemented.");
     }
     save(entity: T): Promise<T> {
@@ -98,3 +111,4 @@ export class Repo<T extends IEntity> implements IRepo<T>{
     }
     
 }
+

@@ -13,6 +13,8 @@
             ],
             "runtimeExecutable": "npm",
             "runtimeArgs": ["start"],
+            "console": "integratedTerminal",
+            "sourceMaps": true
         },
 
         {
@@ -25,15 +27,21 @@
             "outputCapture": "console",
             "runtimeExecutable": "npm",
             "runtimeArgs": ["test"],
+            "console": "integratedTerminal",
+            "sourceMaps": true
         },
         {
             "type": "node",
             "request": "launch",
             "name": "Run File",
+            "runtimeExecutable": "npx",
+            "runtimeArgs": ["ts-node"],
             "skipFiles": [
                 "<node_internals>/**"
             ],
-            "program": "${currentFile}",
+            "program": "${file}",
+            "console": "integratedTerminal",
+            "sourceMaps": true
         }
     ]
 }
