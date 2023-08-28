@@ -1,5 +1,5 @@
 import { IEntity } from "../entities/entity";
-import { IProvince } from "../entities/province-entity";
+import { IProvince } from "../entities/province";
 
 
 export interface IViewBuilder<T extends IEntity, U>{

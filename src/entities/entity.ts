@@ -7,7 +7,7 @@ export interface ColumnDesc {
     type: string;
     modifiers: Option<string[]>;
 }
-export type Id = number | undefined;
+export type Id = Option<number>;
 export type Ref<T extends IEntity> = number | T | undefined | {id: Id};
 
 export interface IEntity{

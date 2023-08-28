@@ -2,9 +2,13 @@
 import { configDotenv } from "dotenv";
 configDotenv()
 
-import express from "express";
+import express, { Errback, NextFunction, Request, Response } from "express";
 import { provinceRouter } from "./routers/province-router";
 import { kabupatenRouter } from "./routers/kabupaten-router";
+import e from "express";
+import { ControllerError } from "./controllers/controller";
+import { DataValidationError } from "./validators/data-validator";
+import { RepoObjectNotFoundError, RepoParamError } from "./repositories/repo";
 
 
 const app = express();
@@ -25,6 +29,29 @@ app.use('/api/v1/kabupaten', kabupatenRouter);
 // not found
 app.use((req,res) =>{
     return res.status(404).send("404 not found")
+})
+
+
+// set error status codes
+app.use((err: any, req : Request, res: Response, next: NextFunction) => {
+    if (err instanceof ControllerError 
+        || err instanceof DataValidationError
+        || err instanceof RepoObjectNotFoundError
+        || err instanceof RepoParamError){
+        (err as any).status = 400;
+        return next(err);
+    }
+})
+
+// error handler
+app.use((err: any, req : Request, res: Response, next: NextFunction) => {
+    if(res.headersSent){
+        return next(err);
+    }
+    console.error(err.stack)
+    return res.status(err.status? err.status : 500).send({
+        error: err.message
+    });
 })
 
 app.listen(PORT, ()=> {

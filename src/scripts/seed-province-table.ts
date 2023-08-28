@@ -2,7 +2,7 @@
 
 import { configDotenv } from "dotenv";
 configDotenv()
-import { KabupatenModel, ProvinceModel, sequelize } from "../data-source";
+import { KabupatenModel, ProvinceModel, sequelize } from "../repositories/data-source";
 
 sequelize.sync({force:true}).then(()=>{
     ProvinceModel.create({name: 'Aceh'});

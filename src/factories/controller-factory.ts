@@ -1,7 +1,6 @@
-import { Controller, IController } from "../controllers/controller";
+import { Controller, IController, KabupatenController } from "../controllers/controller";
 import { IKabupaten } from "../entities/kabupaten";
-import { IProvince } from "../entities/province-entity";
-import { ProvinceRepo } from "../repositories/province-repo";
+import { IProvince } from "../entities/province";
 import { KabupatenDataValidator, ProvinceDataValidator } from "../validators/data-validator";
 import { ProvinceViewBuilder } from "../view-builders/view-builder";
 import { RepoFactory } from "./repo-factory";
@@ -18,6 +17,7 @@ export class ControllerFactory{
         const repo = RepoFactory.buildKabupatenRepo();
         const dataValidator = new KabupatenDataValidator();
         const viewBuilder = new ProvinceViewBuilder();
-        return new Controller<IKabupaten, Object>(repo, dataValidator, viewBuilder);
+        const provinceRepo = RepoFactory.buildProvinceRepo_2();
+        return new KabupatenController(repo, dataValidator, viewBuilder, provinceRepo);
     }
 }

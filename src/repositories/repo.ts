@@ -1,11 +1,12 @@
 import { Model } from "sequelize";
 import { Entity, IEntity } from "../entities/entity";
 import mysql, { FieldPacket, RowDataPacket } from "mysql2/promise";
+import { Option } from "../utils";
 
 export interface IRepo<T extends IEntity>{
-    getById(id: number) : Promise<T>;
+    getById(id: number) : Promise<Option<T>>;
     getMany(filter: Partial<T>) : Promise<Array<T>>;
-    deleteById(id: number): Promise<void>;
+    deleteById(id: number): Promise<number>;
     save(entity: T): Promise<T>;
     create(entity: T): Promise<T>;
     update(entity: T): Promise<[number]>;
@@ -103,7 +104,7 @@ export class Repo<T extends IEntity> implements IRepo<T>{
         // console.log(values);
         return result;
     }
-    deleteById(id: number): Promise<void> {
+    deleteById(id: number): Promise<number> {
         throw new Error("Method not implemented.");
     }
     save(entity: T): Promise<T> {

@@ -2,8 +2,8 @@ import { configDotenv } from "dotenv";
 
 import mysql2 from "mysql2/promise"
 import { Association, BelongsToGetAssociationMixin, CreationOptional, DataTypes, Model, NonAttribute, Sequelize } from "sequelize";
-import { RepoObjectNotFoundError } from "./repositories/repo";
-import { Id } from "./entities/entity";
+import { RepoObjectNotFoundError } from "./repo";
+import { Id } from "../entities/entity";
 export interface IDataSource {
 
 }
@@ -55,6 +55,7 @@ class KabupatenModel extends Model {
     // You can also pre-declare possible inclusions, these will only be populated if you
     // actively include a relation.
     declare province: NonAttribute<ProvinceModel>; // Note this is optional since it's only populated when explicitly requested in code
+    declare provinceId: Id;
     declare static associations: {
         projects: Association<KabupatenModel, ProvinceModel>;
     };

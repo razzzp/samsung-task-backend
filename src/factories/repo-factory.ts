@@ -1,8 +1,7 @@
 
-import { ProvinceModel, createSQLPool } from "../data-source";
-import { ProvinceRepo } from "../repositories/province-repo";
+import { ProvinceModel, createSQLPool } from "../repositories/data-source";
 import { Repo } from "../repositories/repo";
-import { IProvince, Province } from "../entities/province-entity";
+import { IProvince, Province } from "../entities/province";
 import mysql from "mysql2/promise"
 import sequelize, { Sequelize } from "sequelize";
 import { KabupatenSequelizeRepo, ProvinceSequelizeRepo } from "../repositories/sequelize-repo";
