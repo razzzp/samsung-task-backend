@@ -1,0 +1,18 @@
+Table:
+* Propinsi
+* Kabupaten
+* Kecamatan
+
+API CRUD:
+* Propinsi
+* Kabupaten
+* Kecamatan
+
+Frontend/UI (CRUD Operation)
+* Menu Propinsi: Display Propinsi 
+* Menu Kabupaten: Display Propinsi + Kabupaten
+* Menu Kecamatan: Display Propinsi + Kabupaten + Kecamatan
+
+ReactJS
+Display Image (ex. Logo)
+Responsive Design Web

@@ -9,11 +9,16 @@ import e from "express";
 import { ControllerError } from "./controllers/controller";
 import { DataValidationError } from "./validators/data-validator";
 import { RepoObjectNotFoundError, RepoParamError } from "./repositories/repo";
+import cors from "cors";
 
 
 const app = express();
 const PORT = 5000;
 
+app.use(cors({
+    origin: 'http://localhost:3000',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}))
 app.use(express.json());
 app.use(express.urlencoded({extended:true}));
 
