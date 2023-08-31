@@ -36,14 +36,14 @@ export abstract class EntityValidator implements IDataValidator<IEntity>{
     validatePostData(data: any): IEntity {
         isObject(data);
         isUndefined(data, 'id');
-        data['name'] = checkNameAlphaOnly(data, 'name');
+        data['name'] = checkNameAlphanum(data, 'name');
         this._checkInvalidKeys(data)
         return data;
     }
     validatePutData(data: any): IEntity {
         isObject(data);
         isId(data, 'id');
-        data['name'] = checkNameAlphaOnly(data, 'name');
+        data['name'] = checkNameAlphanum(data, 'name');
         this._checkInvalidKeys(data)
         return data;
     }
@@ -124,10 +124,10 @@ function isString(data: any, field?: string) : data is string {
     return true;
 }
 
-function checkNameAlphaOnly(data : any, field?: string) : string {
+function checkNameAlphanum(data : any, field?: string) : string {
     if(field) data = data[field];
     if (typeof data !== 'string') throw new DataValidationError(`${field?`'${field}'`:'data'} field should be a string`);
-    const re = /^[a-zA-Z\s]+$/;
+    const re = /^[a-zA-Z1-9\s]+$/;
     data = data.trim();
     if (re.test(data)){
         return data;
